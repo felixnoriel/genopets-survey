@@ -1,5 +1,6 @@
 import { ClassSerializerInterceptor, PlainLiteralObject } from '@nestjs/common';
 import { ClassTransformOptions } from 'class-transformer';
+import { Serializable } from './serializable';
 
 export class SerializerInterceptor extends ClassSerializerInterceptor {
   serialize(
@@ -8,6 +9,10 @@ export class SerializerInterceptor extends ClassSerializerInterceptor {
   ): PlainLiteralObject | PlainLiteralObject[] {
     if (Array.isArray(response)) {
       return response.map((item) => this.serialize(item, options));
+    }
+
+    if (!this.hasSerializableProperties(response)) {
+      return super.serialize(response, options);
     }
 
     return this.serializeNestedObject(response, options);
@@ -24,5 +29,13 @@ export class SerializerInterceptor extends ClassSerializerInterceptor {
     });
 
     return result;
+  }
+
+  private hasSerializableProperties(response: PlainLiteralObject): boolean {
+    return (
+      Object.values(response).filter(
+        (item: PlainLiteralObject) => item instanceof Serializable,
+      ).length > 0
+    );
   }
 }

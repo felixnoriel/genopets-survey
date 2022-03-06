@@ -1,0 +1,10 @@
+{
+  "type": "sqlite",
+  "database": "test.db",
+  "synchronize": true,
+  "dropSchema": true,
+  "logging": true,
+  "entities": [
+    "/Users/felixnoriel/WebstormProjects/fullstack-monorepo/apps/api/dist/src/**/*.entity{.ts,.js}"
+  ]
+}

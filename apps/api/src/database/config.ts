@@ -6,6 +6,6 @@ export const databaseConfig: SqliteConnectionOptions = {
   database: 'test.db',
   synchronize: true,
   dropSchema: true,
-  logging: true,
+  logging: false,
   entities: [join(__dirname, '..', '/**/*.entity{.ts,.js}')],
 };

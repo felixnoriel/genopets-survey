@@ -1,14 +1,20 @@
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
-export class CreateSurveyAnswerRequest {
-  @IsString()
-  @IsNotEmpty({ message: 'question_id required!' })
+export class SurveyAnswerObjectRequest {
   @Expose({ name: 'question_id' })
   questionId: string;
 
-  @IsString()
-  @IsNotEmpty({ message: 'answer is required!' })
   @Expose({ name: 'answer' })
   answer: string;
+
+  constructor(data: Partial<SurveyAnswerObjectRequest>) {
+    Object.assign(this, data);
+  }
+}
+
+export class CreateSurveyAnswerRequest {
+  @Expose({ name: 'survey_answers' })
+  @IsNotEmpty({ message: 'survey_answers is required!' })
+  surveyAnswers: SurveyAnswerObjectRequest[];
 }
