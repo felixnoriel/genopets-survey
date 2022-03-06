@@ -12,10 +12,14 @@ export class SurveyController {
   ) {}
 
   @Post('answers')
-  submitSurvey(
-    @Body() createAnswerData: CreateSurveyAnswerRequest,
-  ): Promise<SurveyAnswer> {
-    return this.createSurveyAnswer.run(createAnswerData);
+  async submitSurvey(
+    @Body() createAnswerDataList: CreateSurveyAnswerRequest[],
+  ): Promise<SurveyAnswer[]> {
+    const answers = [];
+    for (const answerData of createAnswerDataList) {
+      answers.push(await this.createSurveyAnswer.run(answerData));
+    }
+    return answers;
   }
 
   @Get('answers')
