@@ -3,7 +3,7 @@ import { CreateSurveyAnswerUseCase } from '../use-cases/create-survey-answer.use
 import { CreateSurveyAnswerRequest } from './requests/create-survey-answer.request';
 import { SurveyAnswer } from '../entities/survey-answer.entity';
 
-@Controller('survey')
+@Controller('v1/survey')
 export class SurveyController {
   constructor(private readonly createSurveyAnswer: CreateSurveyAnswerUseCase) {}
 

@@ -1,4 +1,4 @@
-import { Exclude, Expose, Transform } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -12,8 +12,7 @@ import {
 @Entity('survey_answers')
 export class SurveyAnswer {
   @PrimaryGeneratedColumn({ name: 'id' })
-  @Transform((id) => Number(id))
-  id: string;
+  id: number;
 
   @Expose({ name: 'question_id' })
   @Column('varchar', { name: 'question_id', default: '' })
