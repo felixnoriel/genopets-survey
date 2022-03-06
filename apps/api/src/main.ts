@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SerializerInterceptor } from './serializers/serializer.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   app.useGlobalInterceptors(new SerializerInterceptor(app.get(Reflector)));
