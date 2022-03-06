@@ -6,11 +6,11 @@ import styled from '@emotion/styled';
 import {
   Box,
   BoxProps,
-  useRadio,
+  Flex,
   SystemProps,
   useCheckbox,
   UseCheckboxProps,
-  Flex,
+  useRadio,
 } from '@chakra-ui/react';
 import hexToRGB from '../../utils/hexToRGB';
 
@@ -143,8 +143,9 @@ export const RadioCard = ({
   type = `radio`,
   leftText,
   rightText,
+  answerIndex,
   ...rest
-}: RadioCardProps) => {
+}: RadioCardProps & { answerIndex?: number }) => {
   const [red, green, blue] = hexToRGB(color);
   const { getInputProps: getInputPropsRadio, getCheckboxProps: getRadioProps } =
     useRadio(rest);
@@ -169,6 +170,9 @@ export const RadioCard = ({
     justifyContent,
     flexDirection,
   };
+
+  leftText =
+    type === 'ranked' && input.checked ? String(answerIndex + 1) : leftText;
 
   return (
     <Box as="label">
