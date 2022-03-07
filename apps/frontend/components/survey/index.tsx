@@ -21,6 +21,7 @@ const Survey = () => {
   const { isLoading } = useFetchSurveyAnswers();
 
   const onSubmit = async () => {
+
     if (answerExists) return;
     if (!hasAllQuestionsBeenAnswered()) {
       return alert('Please answer all questions');
@@ -42,10 +43,11 @@ const Survey = () => {
       const { data } = await axiosInstance.post('/survey/answers', {
         survey_answers: transformedAnswers,
       });
-      if (data?.length > 0) {
-        setAnswerExists(true);
-      }
-      setSubmitting(false);
+
+      setTimeout(() => {
+        setAnswerExists(true)
+        setSubmitting(false)
+      }, 3000)
     } catch (err: any) {
       alert(err?.message);
     }
