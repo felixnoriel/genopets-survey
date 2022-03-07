@@ -15,6 +15,7 @@ yarn dev
 - Setup `use case` type of approach on implementing business logic
 - Created controller & endpoint to receive requests on creating survey answers
 - Created unit and e2e tests (tests folder)
+- Run tests with `yarn test:cov` and `yarn test:e2e`
 
 #### Frontend
 - Install zustand as a store state management

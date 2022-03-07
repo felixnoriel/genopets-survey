@@ -21,8 +21,8 @@ describe('SurveyController (e2e)', () => {
       .post('/v1/survey/answers')
       .send({
         survey_answers: [
-          { question_id: '1', answer: 'I do' },
-          { question_id: '2', answer: 'I love Genopets' },
+          { question_id: '1', answer: ['I do'] },
+          { question_id: '2', answer: ['I love Genopets'] },
         ],
       })
       .expect(201)
@@ -30,7 +30,7 @@ describe('SurveyController (e2e)', () => {
         expect(body.data.length).toBeGreaterThanOrEqual(2);
         expect(body.data).toEqual(
           expect.arrayContaining([
-            expect.objectContaining({ question_id: '1', answer: 'I do' }),
+            expect.objectContaining({ question_id: '1', answer: ['I do'] }),
           ]),
         );
       });
@@ -41,8 +41,8 @@ describe('SurveyController (e2e)', () => {
       .post('/v1/survey/answers')
       .send({
         survey_answers: [
-          { question_id: '1', answer: 'I do' },
-          { question_id: '2', answer: 'I love Genopets' },
+          { question_id: '1', answer: ['I do'] },
+          { question_id: '2', answer: ['I love Genopets'] },
         ],
       });
 
@@ -54,7 +54,7 @@ describe('SurveyController (e2e)', () => {
 
         expect(body.data).toEqual(
           expect.arrayContaining([
-            expect.objectContaining({ question_id: '1', answer: 'I do' }),
+            expect.objectContaining({ question_id: '1', answer: ['I do'] }),
           ]),
         );
       });
