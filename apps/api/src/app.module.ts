@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SurveyModule } from './survey/survey.module';
-import { databaseConfig } from './database/config';
+import { databaseConfig } from './config/database';
 
 @Module({
   imports: [TypeOrmModule.forRoot(databaseConfig), SurveyModule],

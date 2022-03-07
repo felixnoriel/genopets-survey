@@ -1,5 +1,6 @@
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Transform } from 'class-transformer';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -18,8 +19,16 @@ export class SurveyAnswer {
   @Column('varchar', { name: 'question_id', default: '' })
   questionId: string;
 
-  @Column('varchar', { name: 'answer', default: '' })
-  answer: string;
+  @Transform((answer) => {
+    if (answer && typeof answer.value === 'string') {
+      try {
+        return JSON.parse(answer.value);
+      } catch (err) {}
+    }
+  })
+  @Column('text', { name: 'answer', default: '' })
+  @Expose({ name: 'answer' })
+  answer: string[] | string;
 
   @CreateDateColumn({ name: 'created_at' })
   @Exclude()
@@ -31,5 +40,12 @@ export class SurveyAnswer {
 
   constructor(surveyAnswerData: Partial<SurveyAnswer>) {
     Object.assign(this, surveyAnswerData);
+  }
+
+  @BeforeInsert()
+  transformAnswerToString() {
+    if (typeof this.answer !== 'string') {
+      this.answer = JSON.stringify(this.answer);
+    }
   }
 }

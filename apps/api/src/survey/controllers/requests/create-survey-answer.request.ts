@@ -6,7 +6,7 @@ export class SurveyAnswerObjectRequest {
   questionId: string;
 
   @Expose({ name: 'answer' })
-  answer: string;
+  answer: string[];
 
   constructor(data: Partial<SurveyAnswerObjectRequest>) {
     Object.assign(this, data);
