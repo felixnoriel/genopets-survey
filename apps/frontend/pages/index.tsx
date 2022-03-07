@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Survey from '../components/survey/Survey';
+import Survey from '../components/survey';
 import { Box } from '@chakra-ui/react';
 
 const Home: NextPage = () => {
