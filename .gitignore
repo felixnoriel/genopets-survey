@@ -31,3 +31,11 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+test.db
+vcs.xml
+prettier.xml
+modules.xml
+.gitignore
+fullstack-monorepo.iml
+Project_Default.xml

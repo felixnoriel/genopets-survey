@@ -21,7 +21,7 @@ export class SurveyController {
     @Body()
     createSurveyAnswerRequest: CreateSurveyAnswerRequest,
   ): Promise<Serializable<SurveyAnswer[]>> {
-    const { surveyAnswers } = createSurveyAnswerRequest as any;
+    const { surveyAnswers } = createSurveyAnswerRequest;
 
     const answers = [];
     for (const answerData of surveyAnswers) {

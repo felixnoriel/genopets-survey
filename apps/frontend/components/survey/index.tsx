@@ -4,12 +4,14 @@ import theme from 'ui/theme';
 import { GodCommandsRaphaelText } from 'ui/atoms/text/EnochGodCommandsRaphaelText';
 import { Button } from 'ui/atoms/button/Button';
 import AlgorithmSvg from 'ui/icons/svg/AlgorithmSvg';
+
 import { SubHeader } from 'ui/atoms/header';
 import { useSurveyAnswerStore } from '../../lib/stores/survey';
 import { useFetchSurveyAnswers } from './requests/useFetchSurveyAnswers';
 import Questions from './Questions';
 import { SurveyQuestionsData } from '../../lib/constants/survey';
 import { axiosInstance } from '../../lib/http-requests/axios';
+import Panel from 'ui/atoms/panel/Panel';
 
 const color = theme.colors.teal[`500`];
 
@@ -57,32 +59,49 @@ const Survey = () => {
   };
 
   return (
-    <Flex
-      color={color}
-      direction="column"
-      gap={2}
-      justify="flex-end"
-      height="full"
+    <Box
+      padding="2rem"
+      background="url(/space-pyramid.png)"
+      backgroundSize="cover"
+      justifyContent="center"
+      display="flex"
+      backgroundColor="#0053412e"
     >
-      <Flex mt={8} alignItems="center" gap={4}>
-        <Box h="64px" w="64px">
-          <AlgorithmSvg />
-        </Box>
+      <Flex
+        color={color}
+        direction="column"
+        gap={2}
+        justify="flex-end"
+        height="full"
+      >
+        <Panel topEye bottomEye>
+          <Flex mt={2} alignItems="center" gap={4} mb={6}>
+            <Text fontSize={60} letterSpacing={0} transform={'scale(0.75, 2)'}>
+              04
+            </Text>
+            <Box h="64px" w="64px">
+              <AlgorithmSvg />
+            </Box>
+          </Flex>
+          <Box paddingY={4}>
+            <SubHeader letterSpacing="initial">SURVEY</SubHeader>
+            <GodCommandsRaphaelText />
+          </Box>
+          <Text fontFamily="Avenir" color="white" marginBottom={4}>
+            Tell us a bit more about you and what you’re looking for in
+            Genopets.
+          </Text>
+          <Flex direction="column" gap={8} maxWidth="650px">
+            {!isLoading && <Questions />}
+            <Button onClick={onSubmit} color="#ffd800" isLoading={submitting}>
+              {answerExists
+                ? 'Thank you for completing the Survey!'
+                : 'Submit & Complete'}
+            </Button>
+          </Flex>
+        </Panel>
       </Flex>
-      <SubHeader letterSpacing="initial">SURVEY</SubHeader>
-      <GodCommandsRaphaelText />
-      <Text fontFamily="Avenir" color="white" marginBottom={2}>
-        Tell us a bit more about you and what you’re looking for in Genopets.
-      </Text>
-      <Flex direction="column" justify="flex-end" gap={8}>
-        {!isLoading && <Questions />}
-        <Button onClick={onSubmit} color="#ffd800" isLoading={submitting}>
-          {answerExists
-            ? 'Thank you for completing the Survey!'
-            : 'Submit & Complete'}
-        </Button>
-      </Flex>
-    </Flex>
+    </Box>
   );
 };
 
